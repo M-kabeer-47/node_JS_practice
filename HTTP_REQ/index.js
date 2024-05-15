@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 
 app.get("/aboutus", (req, res) => {
-    res.send("<h1>About Us</h1>")
+    res.send("<h1>About Us </h1>")
 
 });
 
