@@ -21,18 +21,32 @@ export default function App() {
     
   }
   async function APIkey(){
-    await axios.get("http://localhost:3002/getAPIkey")
+    const response = await axios.get("http://localhost:3002/getAPIkey")
+    console.log(response.data);
+    changeContent(JSON.stringify(response.data));
   }
+  async function getToken(){
+    const response = await axios.get("http://localhost:3002/getToken")
+    console.log(response.data);
+    changeContent(JSON.stringify(response.data));
+  }
+  
   
   function handleClick(button){
     switch (button){
       case "1":
        noAuth();
+       break;
 
        case "2":
         basicAuth();
+        break;
         case "3":
           APIkey();
+          break;
+        case "4":
+          getToken();
+          break;
     }
     
 
@@ -49,7 +63,9 @@ export default function App() {
       <button onClick={()=>{
         handleClick("3")
       }}>Api Key Auth</button>
-      <button>Token Auth</button>
+      <button  onClick={()=>{
+        handleClick("4")
+      }}>Token Auth</button>
 
       <p>
         {content}

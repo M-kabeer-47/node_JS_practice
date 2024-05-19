@@ -10,7 +10,7 @@ app.use(cors());
 app.listen(3002, () => {
     console.log("Server listening on Port 3002");
 });
-
+ 
 app.get("/", async (req, res) => {
     try {
         const response = await axios.get("https://secrets-api.appbrewery.com/random");
