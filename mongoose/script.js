@@ -8,5 +8,12 @@ mongoose.connect("mongodb://localhost/testdb").then(()=>{
 // }
 
 // deleteYasir();
+try{
+    const users = await User.find({name: {$in: ["Samad","Ali"]}, age: {$gt: 10}
+})
+console.log(users);
+}
+catch(e){
+    console.log(e.message);
+}
 
-User.create({name: "Yu2", hobbies: ["Swimming","Gaming"],email:"angelaYu@gmail.com"})

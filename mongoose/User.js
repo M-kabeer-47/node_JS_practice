@@ -6,8 +6,17 @@ const addressSchema = new mongoose.Schema({
 })
 const userSchema = new mongoose.Schema({
     name: String,
-    age: Number,
-    email: String,
+    age: {
+        type: Number,
+        min: 10,
+        max: 50,
+        default: ()=> 42
+    },
+    email: {
+        type : String,
+        required: true,
+        lowercase: true
+    },
     hobbies: [String],
     address: addressSchema
     
