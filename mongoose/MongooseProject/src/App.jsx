@@ -4,7 +4,8 @@ export default function App(){
 
   
   <>
-  <Link to={""}>Hello</Link>  
+  <Link to={"./Login.jsx"}>Login</Link>  
+  <Link to={"./Register.jsx"}>Register</Link>   
   </>
   ) 
 }

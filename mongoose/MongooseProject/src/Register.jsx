@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { MdDriveFileRenameOutline } from "react-icons/md";
 
-export default function Login() {
+export default function Register(){
+
+
+
   const [profile,updateProfile] = useState({
+    fullName: "",
     email: "",
     password: ""
   });
@@ -20,6 +25,7 @@ export default function Login() {
           )
          
         })
+        break;
       case "password":
         updateProfile((prevValue)=>{
           return(
@@ -30,7 +36,18 @@ export default function Login() {
           )
          
         })
-    
+        break;
+        case "fullName":
+            updateProfile((prevValue)=>{
+              return(
+                {
+                  ...prevValue,
+                  fullName: value  
+                }
+              )
+             
+            })
+            break;
     }
   }
   const handleSubmit = (e) => {
@@ -41,14 +58,30 @@ export default function Login() {
 
   return (
     <form className="form_container" onSubmit={handleSubmit}>
-      <div className="logo_container"></div>
+      
       <div className="title_container">
-        <p className="title">Login to your Account</p>
+        <h1 style={{
+            fontSize: "35px "
+        }}>Register</h1>
         <span className="subtitle">
           Get started with our app, just create an account and enjoy the experience.
         </span>
       </div>
       <br />
+      <div className="input_container">
+        <label className="input_label" htmlFor="email_field">Full Name</label>
+        <MdDriveFileRenameOutline className='icon' fontSize={"17px"} />
+        <input
+          placeholder="Full Name"
+          title="Input title"
+          name="fullName"
+          type="text"
+          className="input_field"
+          id="email_field"
+          required
+          onChange={onChange}
+        />
+      </div>
       <div className="input_container">
         <label className="input_label" htmlFor="email_field">Email</label>
         <svg
@@ -125,17 +158,12 @@ export default function Login() {
           onChange={onChange}
         />
       </div>
-      <button title="Sign In" type="submit" className="sign-in_btn">
-        <span>Sign In</span>
-      </button>
-      <div className="separator">
-        <hr className="line" />
-        <span>Or</span>
-        <hr className="line" />
-      </div>
+      
+      
       <button title="Sign In" type="submit" className="sign-in_btn" style={{
         backgroundColor: "black",
-        color: 'white'
+        color: 'white',
+        marginTop: "20px"
       }}>
         <span>Register</span>
       </button>
@@ -144,3 +172,4 @@ export default function Login() {
     </form>
   );
 }
+
