@@ -1,5 +1,9 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { SmileOutlined } from '@ant-design/icons';
+import { Button, Result } from 'antd';
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import profile from '../backend/profile';
 
 export default function Register(){
 
@@ -15,7 +19,7 @@ export default function Register(){
     
     switch(name){
       case "email":
-        value=value.toLowerCase();
+        
         updateProfile((prevValue)=>{
           return(
             {
@@ -50,9 +54,21 @@ export default function Register(){
             break;
     }
   }
-  const handleSubmit = (e) => {
+  async function postData(){
+    let newProfile = {
+      ...profile,
+      email: profile.email.toLowerCase()
+
+    }
+    let response = await axios.post("http://localhost:3000/register",newProfile)
+    console.log(response);
+  }
+   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(profile);
+    
+    
+    postData();
+    updateProfile({fullName: "",email: "",password: ""})
     // Handle form submission logic here
   };
 
@@ -79,6 +95,7 @@ export default function Register(){
           className="input_field"
           id="email_field"
           required
+          value={profile.fullName}
           onChange={onChange}
         />
       </div>
@@ -115,6 +132,7 @@ export default function Register(){
           className="input_field"
           id="email_field"
           required
+          value={profile.email}
           onChange={onChange}
         />
       </div>
@@ -155,12 +173,13 @@ export default function Register(){
           className="input_field"
           id="password_field"
           required
+          value={profile.password}
           onChange={onChange}
         />
       </div>
       
       
-      <button title="Sign In" type="submit" className="sign-in_btn" style={{
+      <button title="Sign In" type="submit" className="sign-in_btn" onClick={handleSubmit} style={{
         backgroundColor: "black",
         color: 'white',
         marginTop: "20px"
@@ -168,7 +187,13 @@ export default function Register(){
         <span>Register</span>
       </button>
      
+     
       <p className="note">Terms of use &amp; Conditions</p>
+      <Result
+    icon={<SmileOutlined />}
+    title="Great, we have done all the operations!"
+    extra={<Button type="primary">Next</Button>}
+  />
     </form>
   );
 }

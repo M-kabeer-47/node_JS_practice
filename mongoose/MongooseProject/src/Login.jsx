@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import {Link} from "react-router-dom"
 export default function Login() {
   const [profile,updateProfile] = useState({
     email: "",
@@ -126,19 +126,24 @@ export default function Login() {
         />
       </div>
       <button title="Sign In" type="submit" className="sign-in_btn">
-        <span>Sign In</span>
+        <span>Log in</span>
       </button>
       <div className="separator">
         <hr className="line" />
         <span>Or</span>
         <hr className="line" />
       </div>
+      <Link to= "./Register.jsx">
       <button title="Sign In" type="submit" className="sign-in_btn" style={{
         backgroundColor: "black",
-        color: 'white'
+        color: 'white',
+        width: "100%",
+        minWidth: "400px"
       }}>
         <span>Register</span>
       </button>
+      </Link>
+      
      
       <p className="note">Terms of use &amp; Conditions</p>
     </form>

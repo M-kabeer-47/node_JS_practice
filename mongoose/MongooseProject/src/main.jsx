@@ -16,6 +16,9 @@ element: <App />
  },{
   path: "/Register.jsx",
   element: <Register />
+ },{
+  path: "/Login.jsx/Register.jsx",
+  element: <Register />
  }
  
 ])
