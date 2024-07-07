@@ -12,16 +12,18 @@ export default function Login() {
     
     switch(name){
       case "email":
-        value=value.toLowerCase();
+        
+        
         updateProfile((prevValue)=>{
           return(
             {
               ...prevValue,
-              email: value   
+              email: value
             }
           )
          
         })
+        break;
       case "password":
         updateProfile((prevValue)=>{
           return(
@@ -32,11 +34,14 @@ export default function Login() {
           )
          
         })
-    
+        break;
     }
+    
   }
   async function handleSubmit(e){
     e.preventDefault();
+    await axios.post("http://localhost:3001/login",profile)
+    updateProfile({email: "",password: ""})
     
     
   }
@@ -88,6 +93,7 @@ export default function Login() {
           className="input_field"
           id="email_field"
           required
+          value={profile.email}
           onChange={onChange}
         />
       </div>
@@ -129,6 +135,7 @@ export default function Login() {
           id="password_field"
           required
           onChange={onChange}
+          value={profile.password}
         />
       </div>
       <button title="Sign In" type="submit" className="sign-in_btn">

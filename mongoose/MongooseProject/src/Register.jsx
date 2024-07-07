@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { SmileOutlined } from '@ant-design/icons';
 import { Button, Result } from 'antd';
 import { MdDriveFileRenameOutline } from "react-icons/md";
+import {useNavigate} from "react-router-dom"
 import profile from '../backend/profile';
 
 export default function Register(){
 
-
-
+  const navigate = useNavigate();
   const [profile,updateProfile] = useState({
     fullName: "",
     email: "",
@@ -60,8 +60,15 @@ export default function Register(){
       email: profile.email.toLowerCase()
 
     }
-    let response = await axios.post("http://localhost:3000/register",newProfile)
-    console.log(response);
+    let response = await axios.post("http://localhost:3001/register",newProfile)
+    console.log(
+      "hI"
+    );
+   
+    if(response){
+      
+      navigate("/")
+    }
   }
    const handleSubmit = (e) => {
     e.preventDefault();
