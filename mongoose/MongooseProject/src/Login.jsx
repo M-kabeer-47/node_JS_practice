@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import {Link} from "react-router-dom"
-
+import {Link, useNavigate} from "react-router-dom"
+import { useAuth0 } from "@auth0/auth0-react";
+axios.defaults.withCredentials = true;
 export default function Login() {
   const [profile,updateProfile] = useState({
     email: "",
     password: ""
   });
+  const {user,loginWithRedirect} = useAuth0();
+  const navigate = useNavigate();
   function onChange(e){
     let {value,name} = e.target;
     
@@ -40,8 +43,17 @@ export default function Login() {
   }
   async function handleSubmit(e){
     e.preventDefault();
-    await axios.post("http://localhost:3001/login",profile)
-    updateProfile({email: "",password: ""})
+    // let response = await axios.post("http://localhost:3001/login",profile)
+    console.log(user);
+    if(user){
+      navigate("http://localhost:5173/Loggedin")
+    }
+         
+    else{
+      updateProfile({email: "",password: ""})
+    }
+    
+    
     
     
   }
@@ -146,7 +158,7 @@ export default function Login() {
         <span>Or</span>
         <hr className="line" />
       </div>
-      <Link to= "./Register.jsx">
+      <Link to= "Register">
       <button title="Sign In" type="submit" className="sign-in_btn" style={{
         backgroundColor: "black",
         color: 'white',
@@ -157,7 +169,9 @@ export default function Login() {
       </button>
       </Link>
       
-     
+     <button onClick={(e)=>{
+      loginWithRedirect();
+     }}>Login with Auth0</button>
       <p className="note">Terms of use &amp; Conditions</p>
     </form>
   );
